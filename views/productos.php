@@ -53,7 +53,7 @@ $productos   = new Productos();
 	<div class="col-md-12">
 		<div class="box box-default color-palette-box">
 		    <div class="box-header with-border">
-		      <h3 class="box-title"><i class="fa fa-users"></i> Usuarios registrados</h3>
+		      <h3 class="box-title"><i class="fa fa-users"></i> Usuarios Que compraron este producto</h3>
 		      <div class="pull-right">
           </div>
 		    </div>
@@ -149,7 +149,7 @@ $productos   = new Productos();
 		break;
 		case 'add':
 		case 'edit':
-		if($id>0){$user = $usuarios->obtener($id);}else{$user=NULL;}
+		if($id>0){$producto = $productos->obtenerProd($id);}else{$user=NULL;}
     if($user==NULL){ $id = 0; $action = "agregar"; }else{ $action="edit"; }
 		
 	?>
@@ -171,21 +171,21 @@ $productos   = new Productos();
 								<?php $numero=rand(100, 10000000); ?>
 									<label for="codigo" class="col-md-4 control-label">Codigo: *</label>
 									<div class="col-md-5">
-										<input id="codigo" class="form-control" type="codigo"  name="codigo" value="<?=($id>0)?$user->cedula:$numero ?>"  required readonly>
+										<input id="codigo" class="form-control" type="codigo"  name="codigo" value="<?=($id>0)?$producto->codigo:$numero ?>"  required readonly>
 									</div>
 								</div>
 
 								<div class="form-group">
 									<label for="nombre" class="col-md-4 control-label">Nombre: *</label>
 									<div class="col-md-5">
-										<input id="nombre" class="form-control" type="text" placeholder="Nombres" name="nombre" value="<?=($id>0)?$user->nombres:'' ?>" required>
+										<input id="nombre" class="form-control" type="text" placeholder="Nombres" name="nombre" value="<?=($id>0)?$producto->nombre:'' ?>" required>
 									</div>
 								</div>
 
 								<div class="form-group">
 									<label for="apellido" class="col-md-4 control-label">Descripcion: *</label>
 									<div class="col-md-5">
-										<input id="descripcion" class="form-control" type="text" placeholder="Descripcion" name="descripcion" value="<?=($id>0)?$user->apellidos:''?>" required>
+										<input id="descripcion" class="form-control" type="text" placeholder="Descripcion" name="descripcion" value="<?=($id>0)?$producto->descripcion:''?>" required>
 									</div>
 								</div>
 
@@ -196,7 +196,7 @@ $productos   = new Productos();
 					                    <option value="">Seleccione...</option>
 					                    <?php 	$productoCat = $productos->consultaCat();
 					                    		foreach($productoCat as $prodCat){ ?>
-					                    <option value="<?=$prodCat->id_categoria?>" <?if($id>0){echo ($user->user_estado=="I")?'selected':'';} ?>><?=$prodCat->nombre?></option>
+					                    <option value="<?=$prodCat->id_categoria?>" <?if($id>0){echo $producto->nombre?'selected':'';} ?>><?if($id>0){echo $producto->nombre;}else{echo $prodCat->nombre;}?></option>
 					                    <?php } ?>
 					                  </select>
 					                </div>
@@ -303,7 +303,7 @@ var chart = AmCharts.makeChart("chartdiv", {
   "marginRight": 70,
   "dataProvider": [{
     "country": "Ventas",
-    "visits": 10,
+    "visits": 15,
     "color": "#FF0F00"
   }],
   "valueAxes": [{

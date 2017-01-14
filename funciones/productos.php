@@ -121,25 +121,24 @@ class Productos{
     return $data;
 	}//perfil
 
-	public function edit($id,$cedula,$nombres,$apellidos,$fecha_nac,$direccion)
+	public function edit($id,$nombre,$descripcion,$categoria)
 	{
-		$id = $this->user;
+		//$id = $this->user;
 		
 		/*$query = Query::prun("SELECT cedula FROM user WHERE cedula = ? AND idpersona != ? LIMIT 1",array("si",$cedula,$id));
 		
 		if($query->result->num_rows>0){
 		  $this->rh->setResponse(false,"Ya existe un usuario registrado con esta cedula.");
 		}else{*/
-		  	$query = Query::prun("UPDATE user SET
-		  													cedula    = ?,
-															nombres   = ?,
-															apellidos = ?,
-															fecha_nac = ?,
-															direccion = ?
-														WHERE idpersona = ? LIMIT 1",
-														array("sssssi",$cedula,$nombres,$apellidos,$fecha_nac,$direccion,$this->user));
+		  	$query = Query::prun("UPDATE productos SET
+		  													
+															nombre_prod  = ?,
+															descripcion = ?,
+															idcategoria = ?
+														WHERE idproducto = ? LIMIT 1",
+														array("sssi",$nombre,$descripcion,$categoria,$id));
 		  	if($query->response){
-					$this->rh->setResponse(true,"Cambios guardados con exito!",true,"inicio.php?ver=usuarios");
+					$this->rh->setResponse(true,"Cambios guardados con exito!",true,"inicio.php?ver=productos");
 			  }else{
 			    $this->rh->setResponse(false,"Ha ocurrido un error inesperado.");
 			  }
@@ -184,23 +183,15 @@ if(Base::IsAjax()):
 				$modelProductos->add($codigo,$nombre,$descripcion,$categoria);
 			break;
 
-			/*case 'edit':
+			case 'edit':
 				$id        = $_POST["id"];
-				$cedula    = $_POST["cedula"];
-				$nombres   = $_POST["nombres"];
-				$apellidos = $_POST["apellidos"];
-				$fecha_nac = $_POST['fecha_nac'];
-				$direccion = $_POST['direccion'];
-				
-				$modelUser->edit($id,$cedula,$nombres,$apellidos,$fecha_nac,$direccion);
-			break;*/
+				$nombre   = $_POST["nombre"];
+				$descripcion = $_POST["descripcion"];
+				$categoria = $_POST['categoria'];
 
-			case 'recuperar':
-				$actual = $_POST['actual'];
-				$nueva  = password_hash($_POST['p2'], PASSWORD_DEFAULT);
-
-				$modelUser->newpass($actual,$nueva);
+				$modelProductos->edit($id,$nombre,$descripcion,$categoria);
 			break;
+
 			case 'delete':
 				$idper = $_POST['id'];
 				$modelUser->delete($idper);
