@@ -1,0 +1,11 @@
+
+[Tue, 13 Dec 2016 18:32:06 -0400] #0 C:\xampp\htdocs\leandro\funciones\conex.php(73): mysqli->prepare('DELETE * FROM u...')
+#1 C:\xampp\htdocs\leandro\funciones\usuarios.php(118): Query::prun('DELETE * FROM u...', Array)
+#2 C:\xampp\htdocs\leandro\funciones\usuarios.php(193): Usuarios->delete(4)
+#3 {main}
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '* FROM user WHERE idpersona = ? LIMIT 1' at line 1
+[Tue, 13 Dec 2016 18:32:13 -0400] #0 C:\xampp\htdocs\leandro\funciones\conex.php(73): mysqli->prepare('DELETE * FROM u...')
+#1 C:\xampp\htdocs\leandro\funciones\usuarios.php(118): Query::prun('DELETE * FROM u...', Array)
+#2 C:\xampp\htdocs\leandro\funciones\usuarios.php(193): Usuarios->delete(4)
+#3 {main}
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '* FROM user WHERE idpersona = ? LIMIT 1' at line 1

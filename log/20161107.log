@@ -1,0 +1,7 @@
+
+[Mon, 07 Nov 2016 11:32:47 -0400] #0 C:\xampp\htdocs\sangre\funciones\conex.php(22): mysqli->__construct('localhost', 'pdcomve_root', 'TZ~P)w%d+.l-', 'pdcomve_sangre')
+#1 C:\xampp\htdocs\sangre\funciones\conex.php(14): DB->__construct()
+#2 C:\xampp\htdocs\sangre\funciones\conex.php(107): DB::getInstance()
+#3 C:\xampp\htdocs\sangre\funciones\class.sesiones.php(101): escape('admin@admin.com')
+#4 {main}
+Access denied for user 'pdcomve_root'@'localhost' (using password: YES)

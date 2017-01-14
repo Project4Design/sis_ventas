@@ -1,0 +1,24 @@
+
+[Fri, 13 Jan 2017 10:48:43 -0430] #0 C:\xampp\htdocs\leandro\funciones\conex.php(81): mysqli_stmt->execute()
+#1 C:\xampp\htdocs\leandro\funciones\usuarios.php(45): Query::prun('INSERT INTO use...', Array)
+#2 C:\xampp\htdocs\leandro\funciones\usuarios.php(181): Usuarios->add('20990297', 'Fran', 'her', NULL, '$2y$10$LyErq11A...', 'cagua')
+#3 C:\xampp\htdocs\leandro\funciones\autoload.php(21): require('C:\\xampp\\htdocs...')
+#4 [internal function]: Autoload('Usuarios')
+#5 C:\xampp\htdocs\leandro\funciones\clientes.php(168): spl_autoload_call('Usuarios')
+#6 {main}
+Column 'fecha_nac' cannot be null
+[Fri, 13 Jan 2017 10:48:43 -0430] #0 C:\xampp\htdocs\leandro\funciones\conex.php(81): mysqli_stmt->execute()
+#1 C:\xampp\htdocs\leandro\funciones\usuarios.php(45): Query::prun('INSERT INTO use...', Array)
+#2 C:\xampp\htdocs\leandro\funciones\clientes.php(179): Usuarios->add('20990297', 'Fran', 'her', 'cagua')
+#3 {main}
+Column 'password' cannot be null
+[Fri, 13 Jan 2017 10:52:09 -0430] #0 C:\xampp\htdocs\leandro\funciones\conex.php(73): mysqli->prepare('INSERT INTO use...')
+#1 C:\xampp\htdocs\leandro\funciones\clientes.php(45): Query::prun('INSERT INTO use...', Array)
+#2 C:\xampp\htdocs\leandro\funciones\clientes.php(179): Clientes->add('20990397', 'fran', 'fran', 'cagua')
+#3 {main}
+Unknown column 'nombre' in 'field list'
+[Fri, 13 Jan 2017 10:53:36 -0430] #0 C:\xampp\htdocs\leandro\funciones\conex.php(73): mysqli->prepare('INSERT INTO use...')
+#1 C:\xampp\htdocs\leandro\funciones\clientes.php(45): Query::prun('INSERT INTO use...', Array)
+#2 C:\xampp\htdocs\leandro\funciones\clientes.php(179): Clientes->add('7288045', 'zuli', 'cordero', 'cagua')
+#3 {main}
+Unknown column 'nombre' in 'field list'
