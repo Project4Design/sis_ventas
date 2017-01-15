@@ -35,6 +35,32 @@ if(isset($_GET['id'])){ $id = $_GET['id']; }else{ $id = 0; }
     <script type="text/javascript" src="plugins/datatables/dataTables.bootstrap.js"></script>
     <script type="text/javascript" src="plugins/datatables/jquery.dataTables.js"></script>
      <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+     <style type="text/css">
+       .resultados{
+          display: none;
+          position: absolute;
+          left: 0px;
+          width: 95%;
+          margin: 0 15px;
+          z-index: 10;
+          background-color: #FFF;
+        }
+        .resultados-box{
+          margin:10px 0;
+          padding: 0;
+          list-style: none;
+        }
+        .resultados-box .result-item{
+          display: block;
+          margin: 5px 0;
+          padding: 7px;
+        }
+        .resultados-box .result-item:hover{
+          color:#fff;
+          background: #70D765;
+          cursor: pointer;
+        }
+     </style>
 
   </head>
   <body class="hold-transition skin-blue sidebar-mini">

@@ -17,7 +17,7 @@ $clientes   = new Clientes();
 
 	<?php break;
 	default: 
-	//$cliente = $clientes->consultaAuto();?>
+	//$cliente = $clientes->consultaAuto(); ?>
 
 	<div class="row">
 		<div class="col-md-12 ">
@@ -25,7 +25,8 @@ $clientes   = new Clientes();
 	          <div class="box-body box-profile">
 	            <div class="box-body">
 							<form id="compra" class="form-horizontal" action="funciones/compras.php" method="POST">
-								<input id="action" type="hidden" name="action" value="<?=$action?>">
+								<input id="action" type="hidden" name="action" value="buscar">
+								<input type="hidden" name="idcliente" id="idcliente">
 								<?
 								if($id>0){ ?>
 									<input type="hidden" name="id" value="<?=$id?>">
@@ -33,16 +34,15 @@ $clientes   = new Clientes();
 								<div class="row">
 								<div class="form-group col-md-offset-2">
 									<label for="cliente" class="col-md-1 control-label">Cliente: *</label>
-									<div class="col-md-4">
-										<input id="cliente" class="form-control" type="cliente"  placeholder="Cliente" name="cliente" autocomplete="off" onKeyUp="buscar();" required>
-										<div id="resultadoBusqueda"></div>
-									</div>
-						
-									
-									<label for="nombre" class="col-md-1 control-label">Cantidad: *</label>
-									<div class="col-md-3">
-										<input id="nombre" class="form-control" type="text" placeholder="Cantidad" name="cantidad" value="<?=($id>0)?$user->nombres:'' ?>" required readonly>
-									</div>
+									<div class="col-md-6">
+										<input id="cliente" class="form-control" type="cliente"  placeholder="Cliente" name="cliente" autocomplete="off"  required>
+
+							          <div class="resultados" id="resultados">
+							            <ul id="resultados-box" class="resultados-box">
+							            </ul>
+							          </div>
+          							</div>
+								</div>
 								</div>
 								</div>	
 								<div class="row">
@@ -85,21 +85,100 @@ $clientes   = new Clientes();
 
 <script type="text/javascript">
 
-$(document).ready(function() {
-    $("#resultadoBusqueda").html('<p>JQUERY VACIO</p>');
-});
+	$(function() {
+    	//
+    	var MIN = 3;
 
-function buscar() {
-    var textoBusqueda = $("input#cliente").val();
- 
-     if (textoBusqueda != "") {
-        $.post("funciones/clientes.php", {valorBusqueda: textoBusqueda, action: buscar}, function(data) {
-            $("#resultadoBusqueda").html(data);
-         }); 
-     } else { 
-        $("#resultadoBusqueda").html('<p>JQUERY VACIO</p>');
-        };
-};
+		  $("#cliente").keyup(function() {
+
+		    var keyword = $("#cliente").val();
+		    if (keyword.length >= MIN) {
+
+		    	$.ajax({
+		    		type: 'POST',
+		    		cache: false,
+		    		url: 'funciones/clientes.php',
+		    		data: {action:'buscar',cliente:keyword},
+		    		dataType: 'json',
+		    		success: function(data){
+		        		$('#resultados-box').html('');
+
+		    			if(data.length>0){
+				        	$('#resultados').attr('style','box-shadow: 0 3px 4px 3px rgba(0, 0, 0, .5);');
+				        	$(data).each(function(key, value) {
+				            	$('#resultados-box').append('<li class="result-item" id="'+value.id+'"">'+value.nombre+"</li>");
+				          	});
+				          	$("#resultados").show();
+				        }
+
+
+
+				        $('.result-item').click(function() {
+				          var text = $(this).html();
+				          $('#cliente').val(text);
+				          $('#b-buscar').click();
+				          $("#idcliente").val(this.id);
+				          $("#producto").prop("readonly",false);
+
+				        });
+		    		},
+		    		error: function(){
+				      $('#resultados-box').html('');
+				      $('#resultados').attr('style','');
+		    		},
+		    		complete: function(){
+
+		    		}
+		    	});
+		       
+		    } else {
+		      $('#resultados-box').html('');
+		      $('#resultados').attr('style','');
+		    }
+		  });
+
+		  $("#cliente").blur(function(){
+		      $("#resultados").fadeOut(500);
+		    }).focus(function(){
+		        $("#resultados").show();
+		      });
+    	/*var cantidad = $("#cantidad");
+ 		$('#cliente').autocomplete({
+ 			source: function(request, response) {
+	        	$.ajax({
+		          type: "post",
+		          url: "funciones/clientes.php",
+		          dataType: "json",
+		          data: {
+		            term : request.term,
+		            cliente : $('#cliente').val(),
+		            action: "buscar"
+		          },
+		          success: function(data) {
+
+		            response(data);
+		             $("#prueba").val(data);
+		          },
+		          error: function(){
+		          },
+		          complete: function(){
+
+		          }
+		        });
+      		},
+    		minLength: 2
+  		});*/
+	});
+
+		function quitarAttr () { 
+		if($("#cantidad").val() != ""){
+			alert("si entro");
+			//$('#cantidad').prop("readonly",false);
+		}
+
+
+	}
+	
 </script>
 
      

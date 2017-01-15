@@ -33,17 +33,29 @@ class Clientes{
 	}//consulta
 
 public function consultaAuto($consultaBusqueda)
-	{
+{
 
-    $query = Query::run("SELECT * FROM cliente WHERE nombre like %$consultaBusqueda%");
+    $query = Query::run("SELECT idcliente,cedula,nombre,apellido FROM cliente WHERE cedula like '%$consultaBusqueda%' ");
     $data = array();
-
+    $id = array();
+    //print_r($query);
     while($registro = $query->fetch_array(MYSQLI_ASSOC)){
-    	$data[] = (object)$registro;
+    	$idcliente = $registro['idcliente'];
+    	//$id[] = $idcliente;
+    	$nombre = $registro['nombre'];
+    	$apellido = $registro['apellido'];
+    	$cedula = $registro['cedula'];
+    	
+    	$data [] = array('id' => $registro['idcliente'] , 'cedula' => $registro['cedula'], 'nombre' => $registro['nombre']);
+
+
     }
-    
-    return $data;
-	}//consulta
+   //echo ($registro);
+  //echo  json_encode($id);
+ echo json_encode($data);
+  
+
+}
 
 
 
@@ -178,9 +190,10 @@ if(Base::IsAjax()):
 			break;
 
 			case 'buscar':
-				$consultaBusqueda = $_POST['valorBusqueda'];
+
+				$consultaBusqueda = $_POST['cliente'];
 				
-				$modelUser->consultaAuto();
+				$modelUser->consultaAuto($consultaBusqueda);
 			break;
 
 			/*case 'recuperar':
