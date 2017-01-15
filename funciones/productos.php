@@ -3,6 +3,7 @@ if(is_readable('../config/config.php')){
   require '../config/config.php';
 }
 
+
 class Productos{
 	private $rh;
 	private $user;
@@ -149,15 +150,15 @@ class Productos{
 	}//Modificar usuario
 
 
-	public function delete($idper)
+	public function delete($idpro)
 	{
 		$id = $this->user;
 		
-		$query = Query::prun("DELETE  FROM user WHERE idpersona = ? LIMIT 1",array("i",$idper));
+		$query = Query::prun("DELETE  FROM producto WHERE idproducto = ? LIMIT 1",array("i",$idpro));
 		
 	
 		  	if($query->response){
-						$this->rh->setResponse(true,"Borrado exito!",true,"inicio.php?ver=usuarios");
+						$this->rh->setResponse(true,"Borrado exito!",true,"inicio.php?ver=productos");
 			  }else{
 			    $this->rh->setResponse(false,"Ha ocurrido un error inesperado.");
 			  }
@@ -165,7 +166,7 @@ class Productos{
 		
 		echo json_encode($this->rh);
 
-	}//Modificar usuario
+	}//borrar producto
 	
 }//Class Usuarios
 
@@ -193,8 +194,8 @@ if(Base::IsAjax()):
 			break;
 
 			case 'delete':
-				$idper = $_POST['id'];
-				$modelUser->delete($idper);
+				$idpro = $_POST['id'];
+				$modelUser->delete($idpro);
 			break;
 		endswitch;
 	endif;

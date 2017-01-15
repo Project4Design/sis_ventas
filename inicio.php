@@ -34,6 +34,7 @@ if(isset($_GET['id'])){ $id = $_GET['id']; }else{ $id = 0; }
     <script src="js/jQuery-2.1.4.min.js"></script>
     <script type="text/javascript" src="plugins/datatables/dataTables.bootstrap.js"></script>
     <script type="text/javascript" src="plugins/datatables/jquery.dataTables.js"></script>
+     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
   </head>
   <body class="hold-transition skin-blue sidebar-mini">
@@ -302,6 +303,10 @@ if(isset($_GET['id'])){ $id = $_GET['id']; }else{ $id = 0; }
 <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
 <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
 <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+<script
+  src="http://code.jquery.com/ui/1.8.23/jquery-ui.js"
+  integrity="sha256-lFA8dPmfmR4AQorTbla7C2W0aborhztLt0IQFLAVBTQ="
+  crossorigin="anonymous"></script>
 
 <!-- Chart code -->
 <script>
@@ -311,11 +316,11 @@ var chart = AmCharts.makeChart("chartdiv", {
   "marginRight": 70,
   "dataProvider": [{
     "country": "Clientes",
-    "visits": <?=$clientesCantidad?>,
-    "color": "#FF0F00"
+    "visits": 5,
+    "color": "#2033E1"
   }, {
     "country": "Usuarios",
-    "visits": <?=$cantidad?>,
+    "visits": 2,
     "color": "#FF6600"
   }],
   "valueAxes": [{

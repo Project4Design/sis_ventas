@@ -32,6 +32,21 @@ class Clientes{
     return $data;
 	}//consulta
 
+public function consultaAuto($consultaBusqueda)
+	{
+
+    $query = Query::run("SELECT * FROM cliente WHERE nombre like %$consultaBusqueda%");
+    $data = array();
+
+    while($registro = $query->fetch_array(MYSQLI_ASSOC)){
+    	$data[] = (object)$registro;
+    }
+    
+    return $data;
+	}//consulta
+
+
+
 	public function add($cedula,$nombres,$apellidos,$direccion)
 	{
 		$query = Query::prun("SELECT cedula FROM cliente WHERE cedula = ? LIMIT 1",array("s",$cedula));
@@ -160,6 +175,12 @@ if(Base::IsAjax()):
 				$direccion = $_POST['direccion'];
 				
 				$modelUser->edit($id,$cedula,$nombres,$apellidos,$direccion);
+			break;
+
+			case 'buscar':
+				$consultaBusqueda = $_POST['valorBusqueda'];
+				
+				$modelUser->consultaAuto();
 			break;
 
 			/*case 'recuperar':

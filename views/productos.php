@@ -30,20 +30,16 @@ $productos   = new Productos();
 	          </div>
 	          <!-- /.box-body -->
 	        </div>
-	        	<a class="btn btn-warning" href="?ver=usuarios&opc=edit&id=<?=$id?>"><i class="fa fa-pencil" aria-hidden="true"></i> Modificar Producto</a>
+	        	<a class="btn btn-warning" href="?ver=productos&opc=edit&id=<?=$id?>"><i class="fa fa-pencil" aria-hidden="true"></i> Modificar Producto</a>
 	        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	       		<button class="btn btn-danger" data-toggle="modal" data-target="#el-usuario-<?=$user->idpersona?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Eliminar Producto</button>
+	       		<button class="btn btn-danger" data-toggle="modal" data-target="#el-usuario-<?=$producto->idproducto?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Eliminar Producto</button>
 		</div>
-
+   <!-- ggrafico de ventas -->
 		<div class="col-md-6">
 			<div class="box box-primary">
 	           <div id="chartdiv"></div> 
-	          <!-- /.box-body -->
 	        </div>
-	        	<a class="btn btn-warning" href="?ver=usuarios&opc=edit&id=<?=$id?>"><i class="fa fa-pencil" aria-hidden="true"></i> Modificar Producto</a>
-	        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	       		<button class="btn btn-danger" data-toggle="modal" data-target="#el-usuario-<?=$user->idpersona?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Eliminar Producto</button>
-		</div>
+		</div><!-- final grafico de ventas --> 
 	</div>
 
       <br>
@@ -98,13 +94,8 @@ $productos   = new Productos();
 </div>
 
 
-
-
-
-
-
 		<!-- Modal eliminar usuario-->
-      <div id="el-usuario-<?=$user->idpersona?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modModalLabel">
+      <div id="el-usuario-<?=$producto->idproducto?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modModalLabel">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="box-titles modal-header">
@@ -113,14 +104,14 @@ $productos   = new Productos();
             </div>
             <div class="modal-body">
               <div class="row">
-	          	<form id="fr-del-prod" action="funciones/usuarios.php" method="post">
+	          	<form id="fr-del-prod" action="funciones/productos.php" method="post">
 		            <input type="hidden" name="action" value="delete">
-		            <input type="hidden" name="id" value="<?=$user->idpersona?>">
+		            <input type="hidden" name="id" value="<?=$producto->idproduct?>">
 		           
 		            <ul>
-		            	<li><strong>Nombre y apellido:</strong> <?=$user->nombres?> <?=$user->apellidos?> </li>
-		            	<li><strong>Cedula:</strong> <?=$user->cedula?></li></li>
-		            	<li><strong>Direccion:</strong> <?=$user->direccion?> </li></li>
+		            	<li><strong>Nombre:</strong> <?=$producto->nombre_prod?> </li>
+		            	<li><strong>Descripcion:</strong> <?=$producto->descripcion?></li></li>
+		            	<li><strong>Categoria:</strong> <?=$producto->nombre?> </li></li>
 		            </ul>
 		            <div class="form-group">		
 		              <div class="progress" style="display:none">
@@ -161,7 +152,7 @@ $productos   = new Productos();
 						</div>
 
 						<div class="box-body">
-							<form id="registro" class="form-horizontal" action="funciones/productos.php" method="POST">
+							<form id="registro" class="form-horizontal" action="funciones/usuarios.php" method="POST">
 								<input id="action" type="hidden" name="action" value="<?=$action?>">
 								<?
 								if($id>0){ ?>
@@ -178,7 +169,7 @@ $productos   = new Productos();
 								<div class="form-group">
 									<label for="nombre" class="col-md-4 control-label">Nombre: *</label>
 									<div class="col-md-5">
-										<input id="nombre" class="form-control" type="text" placeholder="Nombres" name="nombre" value="<?=($id>0)?$producto->nombre:'' ?>" required>
+										<input id="nombre" class="form-control" type="text" placeholder="Nombres" name="nombre" value="<?=($id>0)?$producto->nombre_prod:'' ?>" required>
 									</div>
 								</div>
 
@@ -289,14 +280,14 @@ $productos   = new Productos();
 
 <script>
 
-$(function () {
-   $('#data-table').DataTable({
+ $('#data-table').DataTable({
     'language':{
-      'url':'../js/spanish.json',
+      'url':'js/spanish.json',
     },
+    "ordering": false,
     responsive: true
-  		});
   });
+
 var chart = AmCharts.makeChart("chartdiv", {
   "type": "serial",
   "theme": "light",
@@ -304,7 +295,7 @@ var chart = AmCharts.makeChart("chartdiv", {
   "dataProvider": [{
     "country": "Ventas",
     "visits": 15,
-    "color": "#FF0F00"
+    "color": "#392FCA"
   }],
   "valueAxes": [{
     "axisAlpha": 0,

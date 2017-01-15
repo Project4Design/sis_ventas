@@ -137,7 +137,7 @@ class Usuarios{
 		
 		echo json_encode($this->rh);
 
-	}//Modificar usuario
+	}//borrar usuario
 	public function newpass($actual,$nueva){
 
 		$query = Query::run("SELECT password FROM user WHERE idpersona = $this->user LIMIT 1");
